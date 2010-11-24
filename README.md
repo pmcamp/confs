@@ -2,9 +2,10 @@
 
 ## 2010-11-24
    换域名迁移Discuz!后要做几件事情
-* 更新config下的config_global.php和config_ucenter.php的数据库配置和UC_API地址
-* 更新uc_server/data/下的config.inc.php数据库配置
-* 进入Discuz!后台更新缓存
+
+*   更新config下的config_global.php和config_ucenter.php的数据库配置和UC_API地址
+*   更新uc_server/data/下的config.inc.php数据库配置
+*   进入Discuz!后台更新缓存
 
 
 

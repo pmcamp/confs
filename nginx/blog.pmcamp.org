@@ -1,0 +1,22 @@
+server {
+     listen  80;
+     server_name blog.pmcamp.org pmcamp.info *.pmcamp.info; 
+
+     root /var/www/blog.pmcamp.org;
+
+     location / {
+         index  index.php;
+         if ($host != 'blog.pmcamp.org'){
+           rewrite ^/(.*)$ http://blog.pmcamp.org/$1 permanent;
+         }
+         if (!-e $request_filename) {
+                return 404;
+         }
+     }
+
+     location ~ \.php$ {
+         fastcgi_pass   127.0.0.1:9000;
+         fastcgi_index  index.php;
+         include /etc/nginx/fastcgi_params;
+     }
+}
