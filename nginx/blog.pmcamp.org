@@ -5,13 +5,23 @@ server {
      root /var/www/blog.pmcamp.org;
 
      location / {
-         index  index.php;
+         index  index.html index.htm index.php;
          if ($host != 'blog.pmcamp.org'){
            rewrite ^/(.*)$ http://blog.pmcamp.org/$1 permanent;
          }
          if (!-e $request_filename) {
-                return 404;
-         }
+            rewrite ^.+/?(/wp-.*) $1 last;
+            rewrite ^.+/?(/.*\.php)$ $1 last;
+            rewrite ^(.+)$ /index.php?q=$1 last;
+	    return 404;
+        }
+
+        #if (-f $request_filename/index.php){
+        #   rewrite (.*) $1/index.php;
+        #}
+        #if (!-f $request_filename){
+        #   rewrite (.*) /index.php;
+        #}
      }
 
      location ~ \.php$ {
