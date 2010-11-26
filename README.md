@@ -1,5 +1,10 @@
 # some pmcamp website configuration files
-
+## 2010-11-26 
+  install db cache reloaded plugin
+    cd wp-content/plugins/
+    wget http://downloads.wordpress.org/plugin/db-cache-reloaded.2.1.zip 
+    unzip db-cache-reloaded.2.1.zip
+    rm db-cache-reloaded.2.1.zip
 ## 2010-11-24
    换域名迁移Discuz!后要做几件事情
 
