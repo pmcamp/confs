@@ -1,32 +1,21 @@
 server {
-     listen  80;
-     server_name blog.pmcamp.org pmcamp.info *.pmcamp.info; 
-
+     listen  80; 
+     server_name blog.pmcamp.org;
      root /var/www/blog.pmcamp.org;
 
-     location / {
+     location / { 
          index  index.html index.htm index.php;
-         if ($host != 'blog.pmcamp.org'){
-           rewrite ^/(.*)$ http://blog.pmcamp.org/$1 permanent;
-         }
          if (!-e $request_filename) {
             rewrite ^.+/?(/wp-.*) $1 last;
             rewrite ^.+/?(/.*\.php)$ $1 last;
             rewrite ^(.+)$ /index.php?q=$1 last;
-	    return 404;
-        }
-
-        #if (-f $request_filename/index.php){
-        #   rewrite (.*) $1/index.php;
-        #}
-        #if (!-f $request_filename){
-        #   rewrite (.*) /index.php;
-        #}
-     }
+            return 404;
+        }   
+     }   
 
      location ~ \.php$ {
          fastcgi_pass   127.0.0.1:9000;
          fastcgi_index  index.php;
          include /etc/nginx/fastcgi_params;
-     }
+     }   
 }

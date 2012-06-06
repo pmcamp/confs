@@ -1,0 +1,31 @@
+server {
+  server_name *.pmconf.org;
+  return 301 $scheme://pmconf.org$request_uri;
+}
+
+server {
+        listen 80;
+        server_name pmconf.org;
+        root /var/www/pmconf.org/;
+        access_log /var/www/pmconf.org/logs/pmconf.org-access.log;
+
+        location ^~ /static/ {
+            alias /var/www/pmconf.org/static/;
+        }
+
+        location = /robots.txt{
+            log_not_found off;
+        }
+        location = /favicon.ico{
+            log_not_found off;
+        }
+        location / {
+            proxy_pass_header Server;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Scheme $scheme;
+            proxy_pass http://127.0.0.1:8001;
+        }
+}
+
