@@ -1,0 +1,11 @@
+server {
+        listen 80;
+        server_name hdcon.org;
+        root /var/www/hdcon.org/;
+        index index.html index.htm;
+}
+server {
+  server_name *.hdcon.org;
+  return 301 $scheme://hdcon.org$request_uri;
+}
+
