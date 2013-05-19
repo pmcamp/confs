@@ -5,6 +5,20 @@ server {
         index index.html index.htm;
 }
 server {
+        listen 80;
+        server_name lucky.hdcon.org;
+        root /var/www/lucky/;
+        auth_basic "Please input your username and password!";
+        auth_basic_user_file /tmp/pmcamp.pass;
+}
+server {
+        listen 80;
+        server_name munin.hdcon.org;
+        root /var/cache/munin/www/;
+        auth_basic "Please input your username and password!";
+        auth_basic_user_file /tmp/pmcamp.pass;
+}
+server {
   server_name *.hdcon.org;
   return 301 $scheme://hdcon.org$request_uri;
 }

@@ -6,7 +6,7 @@ server {
 server {
         listen 80;
         server_name pmconf.org;
-        root /var/www/pmconf.org/;
+        root /var/www/PMConf2013/;
         access_log /var/www/pmconf.org/logs/pmconf.org-access.log;
 
         location ^~ /static/ {
@@ -19,7 +19,7 @@ server {
         location = /favicon.ico{
             log_not_found off;
         }
-        location / {
+        location /2012/ {
             proxy_pass_header Server;
             proxy_set_header Host $http_host;
             proxy_redirect off;

@@ -1,0 +1,30 @@
+server {
+     listen  80; 
+     server_name blog.ihackathon.org;
+     root /var/www/ihackathon.org;
+
+     location / { 
+         index  index.html index.htm index.php;
+         if (!-e $request_filename) {
+            rewrite ^.+/?(/wp-.*) $1 last;
+            rewrite ^.+/?(/.*\.php)$ $1 last;
+            rewrite ^(.+)$ /index.php?q=$1 last;
+            return 404;
+        }   
+     }   
+
+     location ~ \.php$ {
+         fastcgi_pass   127.0.0.1:9000;
+         fastcgi_index  index.php;
+         include /etc/nginx/fastcgi_params;
+     }   
+}
+server {
+  server_name *.ihackathon.org;
+  return 301 $scheme://ihackathon.org$request_uri;
+}
+server {
+     listen  80; 
+     server_name ihackathon.org;
+     root /var/www/iHackathon;
+}
